@@ -1,10 +1,10 @@
 # **Smart-AC-Temperature-Control**
 
 ### Content: 
-*Introduction 
-*Requirements
-*Screenshots
-*Conclusion 
+* Introduction 
+* Requirements
+* Screenshots
+* Conclusion 
 
 
 
