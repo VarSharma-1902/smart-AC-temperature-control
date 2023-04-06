@@ -1,1 +1,1 @@
-# smart-AC-temperature-control
+# Smart-AC-Temperature-Control
