@@ -1,0 +1,153 @@
+[
+    {
+        "id": "8bf5286e9ef48a51",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fc2d136ca4be0f2d",
+        "type": "inject",
+        "z": "8bf5286e9ef48a51",
+        "name": "",
+        "props": [
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "e3c03641ee5adb60"
+            ]
+        ]
+    },
+    {
+        "id": "e3c03641ee5adb60",
+        "type": "http request",
+        "z": "8bf5286e9ef48a51",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=Chennai&appid=7897025ba9f189de74bb32f19233a9b5",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "d1a4c74201bd64c3"
+            ]
+        ]
+    },
+    {
+        "id": "d1a4c74201bd64c3",
+        "type": "json",
+        "z": "8bf5286e9ef48a51",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "0598fbf2f58fb57c"
+            ]
+        ]
+    },
+    {
+        "id": "aa34bb19e1d6b595",
+        "type": "debug",
+        "z": "8bf5286e9ef48a51",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0598fbf2f58fb57c",
+        "type": "function",
+        "z": "8bf5286e9ef48a51",
+        "name": "function 4",
+        "func": "const date = new Date();\nvar apiData = msg.payload;\nvar month = date.getMonth()+1;\nvar hour = date.getHours();  \nvar temperature = msg.payload.main.temp;\nvar m = {'Month':month, 'Hour':hour, 'Outdoor air temperature':temperature};\nreturn {payload:m};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 180,
+        "wires": [
+            [
+                "81a5bfdddc2ff1f5"
+            ]
+        ]
+    },
+    {
+        "id": "81a5bfdddc2ff1f5",
+        "type": "csv",
+        "z": "8bf5286e9ef48a51",
+        "name": "",
+        "sep": ",",
+        "hdrin": "",
+        "hdrout": "none",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "Month, Hour, Outdoor air temperature",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "279f0e15e3737a1f"
+            ]
+        ]
+    },
+    {
+        "id": "279f0e15e3737a1f",
+        "type": "file",
+        "z": "8bf5286e9ef48a51",
+        "name": "",
+        "filename": "C:/Users/dell/Documents/VIT/6th_Semester/IoT_CSE3062/Project/temperatureOutput.csv",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 410,
+        "y": 380,
+        "wires": [
+            [
+                "aa34bb19e1d6b595"
+            ]
+        ]
+    }
+]
