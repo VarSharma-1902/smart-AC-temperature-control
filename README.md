@@ -1,7 +1,7 @@
 # Smart-AC-Temperature-Control
 
 ## Contents: 
-> * Introduction 
+>* Introduction 
 > * Scope
 > * Problem Definition
 > * Software Requirements 
