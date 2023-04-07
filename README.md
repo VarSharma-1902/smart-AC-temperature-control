@@ -1,14 +1,14 @@
 # Smart-AC-Temperature-Control
 
 ## Contents: 
->* Introduction 
-> * Scope
-> * Problem Definition
-> * Software Requirements 
-> * Architecture
-> * Model
-> * Screenshots
-> * Conclusion 
+* Introduction 
+* Scope
+* Problem Definition
+* Software Requirements 
+* Architecture
+* Model
+* Screenshots
+* Conclusion 
 ___
 
 ## Introduction
