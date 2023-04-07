@@ -1,6 +1,6 @@
 # **Smart-AC-Temperature-Control**
 
-### Contents: 
+## Contents: 
 * Introduction 
 * Requirements
 * Architecture
