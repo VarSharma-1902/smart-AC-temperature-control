@@ -4,7 +4,7 @@
 * Introduction 
 * Scope
 * Problem Definition
-* Requirements
+* Software Requirements 
 * Architecture
 * Model
 * Screenshots
@@ -25,4 +25,10 @@ ___
 ## Problem Definition 
 
 The problem addressed by regulating temperature in a smart AC based on user thermal comfort is that traditional HVAC systems often use a one-size-fits-all approach to temperature regulation, leading to inefficient energy usage and reduced thermal comfort for occupants. By using advanced sensor technology, algorithms, and personalized models, smart AC systems can adjust the temperature and humidity levels to meet the individual preferences of occupants, leading to improved energy efficiency and thermal comfort. The problem definition, therefore, is to develop effective algorithms and personalized models that can enable smart AC systems to regulate temperature based on user thermal comfort, leading to improved energy efficiency and occupant comfort in various building types.
+___
+
+## Software Requirements
+
+> Node-Red
+> Python Packages
 ___
