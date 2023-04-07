@@ -1,0 +1,375 @@
+[
+    {
+        "id": "c8c78f4d.679e8",
+        "type": "subflow",
+        "name": "csvColumnParser",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 70,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "a8857356.d49e68"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 900,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "d71e0bef.46647",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "a8857356.d49e68",
+        "type": "csv",
+        "z": "c8c78f4d.679e8",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "d12b5d18.58218"
+            ]
+        ]
+    },
+    {
+        "id": "3b501c89.fa554c",
+        "type": "split",
+        "z": "c8c78f4d.679e8",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 540,
+        "y": 80,
+        "wires": [
+            [
+                "6dad6ed9.c91f08"
+            ]
+        ]
+    },
+    {
+        "id": "6dad6ed9.c91f08",
+        "type": "function",
+        "z": "c8c78f4d.679e8",
+        "name": "",
+        "func": "if (!context.results) context.results = {}\n\nif (!context.results[msg.topic]) context.results[msg.topic] = []\ncontext.results[msg.topic].push(msg.payload)\nmsg.payload = context.results\n\nif ((msg.originalParts.index === msg.originalParts.count - 1) && (msg.parts.index === msg.parts.count - 1)) {\n    msg.payload = context.results\n    context.results = {}\n    return msg\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 80,
+        "wires": [
+            [
+                "d71e0bef.46647"
+            ]
+        ]
+    },
+    {
+        "id": "d12b5d18.58218",
+        "type": "change",
+        "z": "c8c78f4d.679e8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "originalParts",
+                "pt": "msg",
+                "to": "parts",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "3b501c89.fa554c"
+            ]
+        ]
+    },
+    {
+        "id": "d71e0bef.46647",
+        "type": "change",
+        "z": "c8c78f4d.679e8",
+        "name": "spread",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$spread(payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1bfe0a812f4a095a",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4a1feb43f0576f03",
+        "type": "inject",
+        "z": "1bfe0a812f4a095a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "e2ad1808e09717b6"
+            ]
+        ]
+    },
+    {
+        "id": "e2ad1808e09717b6",
+        "type": "file in",
+        "z": "1bfe0a812f4a095a",
+        "name": "",
+        "filename": "C:/Users/dell/Documents/VIT/6th_Semester/ISM_CSE3502/Project/temp.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 330,
+        "y": 120,
+        "wires": [
+            [
+                "2a8f858602690372"
+            ]
+        ]
+    },
+    {
+        "id": "15d432ed60c53774",
+        "type": "debug",
+        "z": "1bfe0a812f4a095a",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "2a8f858602690372",
+        "type": "subflow:c8c78f4d.679e8",
+        "z": "1bfe0a812f4a095a",
+        "name": "",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "a41304140d4e8372",
+                "b2259ae7ef12b397"
+            ]
+        ]
+    },
+    {
+        "id": "a41304140d4e8372",
+        "type": "function",
+        "z": "1bfe0a812f4a095a",
+        "name": "function 5",
+        "func": "var outTemp = msg.payload[0].Outdoor_air_temperature;\nvar acTemp = msg.payload[3].Predicted_AC_temperature;\nvar payload = [outTemp, acTemp];\nvar m = {\"Out\":outTemp,\"AC\":acTemp, \"Payload\":payload};\nmsg.payload = [{\n    \"series\":[\"Outdoor Air Temperature\", \"Predicted AC Temperature\"],\n    \"data\":payload,\n    \"labels\": [22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37]\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "2c6bce03a5c5948b"
+            ]
+        ]
+    },
+    {
+        "id": "2c6bce03a5c5948b",
+        "type": "ui_chart",
+        "z": "1bfe0a812f4a095a",
+        "name": "",
+        "group": "88db32cb95f04beb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Predicted AC Temperature vs Outdoor Temperature",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": "30",
+        "removeOlderPoints": "100",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#20cb53",
+            "#1f558e",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a5e698",
+            "#d62728",
+            "#ff9896",
+            "#9451d2",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 330,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b2259ae7ef12b397",
+        "type": "function",
+        "z": "1bfe0a812f4a095a",
+        "name": "function 6",
+        "func": "var outTemp = msg.payload[0].Outdoor_air_temperature;\nvar month = msg.payload[1].Month;\nvar hour = msg.payload[2].Hour;\nvar acTemp = msg.payload[3].Predicted_AC_temperature;\n\n//extract hour and predicted temperature pertaining to a specific month\nvar hourSp = [];\nvar acTempSp = [];\nfor(var i=0; i<month.length; i++){\n    if(month[i] == 6){\n        hourSp.push(hour[i]);\n        acTempSp.push(acTemp[i]);\n    }\n}\n\n// var m = { \"Out\": outTemp, \"AC\": acTemp, \"Month\": month, \"Hour\": hour, \"Specific Hour\": hourSp,\n// \"Specific AC temp\": acTemSp, \"Payload\": payload };\n\nvar payload = [acTemp, hour];\n\nmsg.payload = [{\n    \"series\": [\"Predicted AC Temperature\", \"Hour\"],\n    \"data\": payload,\n    \"labels\": [1,2,3,4,5,6,7,8,9,10,11,12]\n}];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "15d432ed60c53774",
+                "61a827fa57e61dfa"
+            ]
+        ]
+    },
+    {
+        "id": "61a827fa57e61dfa",
+        "type": "ui_chart",
+        "z": "1bfe0a812f4a095a",
+        "name": "",
+        "group": "88db32cb95f04beb",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Month-wise AC and Outdoor Temperature Variations",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "Months",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#9f59d9",
+            "#c03030",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 790,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88db32cb95f04beb",
+        "type": "ui_group",
+        "name": "User Behaviour Dashboard",
+        "tab": "9dd335a46d54faf6",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9dd335a46d54faf6",
+        "type": "ui_tab",
+        "name": "Smart AC",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
