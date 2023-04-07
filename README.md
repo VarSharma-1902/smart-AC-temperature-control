@@ -29,6 +29,6 @@ ___
 
 ## Software Requirements
 
-> Node-Red
+> Node-Red <br>
 > Python Packages
 ___
