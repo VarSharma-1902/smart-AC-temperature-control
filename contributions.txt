@@ -1,0 +1,11 @@
+1. Hetal Atwal 
+Reading input weather data from OpenWeatherMap API in Node Red, parsing the JSON file obtained and then extracting the useful information from those files, later stored to a csv file.
+
+2. Varsha Sharma
+Collecting the machine learning model’s prediction and combining it with the dataset to generate graph visualisations by creating Node Red flow using various nodes. The final output is displayed on a user dashboard.
+
+3. Meghna Sinha
+Carrying out research to find out existing methodologies for smart HVAC systems. From the research carried out, a dataset suitable for the project was chosen. An exploratory analysis and data preprocessing was performed on this data to extract the useful features for the ML model.
+
+4. Sriganesh Raj
+Various machine learning regression models such as multiple linear regression, SVR, etc. were trained on the preprocessed data and evaluated. The best model (multiple linear regression) was chosen for the proposed implementation.
